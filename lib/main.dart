@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,15 +44,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  bool machineState = false;
+
+  bool onOrOff() {
+    //API
+    return true;
   }
 
   @override
@@ -60,11 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Color.fromRGBO(2, 88, 77, 1),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        backgroundColor: const Color.fromRGBO(255, 228, 121, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
@@ -73,27 +74,113 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(color: Color.fromRGBO(0, 114, 97, 1)),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(color: Color.fromRGBO(0, 41, 55, 1)),
+                        child: Text("💧", style: TextStyle(fontSize: 56)),
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    SizedBox(width: 16,),
+                    Text("pH \n")
+                  ]
+                ),
+              ),
+            ),
+            const SizedBox(height: 20,),
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(color: Color.fromRGBO(0, 114, 97, 1)),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(color: Color.fromRGBO(0, 41, 55, 1)),
+                        child: Text("🌡", style: TextStyle(fontSize: 56)),
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    SizedBox(width: 16,),
+                    Text("Temp control \n")
+                  ]
+                ),
+              ),
+            ),
+            const SizedBox(height: 20,),
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(color: Color.fromRGBO(0, 114, 97, 1)),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(color: Color.fromRGBO(0, 41, 55, 1)),
+                        child: Text("🌊", style: TextStyle(fontSize: 56)),
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    SizedBox(width: 16,),
+                    Text("Turbidity \n"),
+                  ]
+                ),
+              ),
+            ),
+            const SizedBox(height: 20,),
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(color: Color.fromRGBO(0, 114, 97, 1)),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(color: Color.fromRGBO(0, 41, 55, 1)),
+                        child: Text("💧", style: TextStyle(fontSize: 56)),
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    SizedBox(width: 16,),
+                    Text("Water volume \n")
+                  ]
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: SizedBox.expand(),
+              )
+            ),
+            ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(12)),
               child: Container(
-                decoration: BoxDecoration(color: Colors.teal),
-                child: const Text("No"),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                decoration: const BoxDecoration(color: Colors.black),
+                child: const Text("Turn off", style: TextStyle(color: Colors.amberAccent, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
               ),
-            ),
-            ClipRRect(
-              child: Container(
-
-              ),
-            ),
-            ClipRRect(
-              child: Container(
-
-              ),
-            ),
-            ClipRRect(
-              child: Container(
-
-              ),
-            ),
+            )
           ],
         ),
       ),
